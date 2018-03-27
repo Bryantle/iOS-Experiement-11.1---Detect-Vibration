@@ -7,9 +7,20 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
-
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake{
+            let instance = UIAlertController(title: "Bryantle", message: "You are shaking", preferredStyle: UIAlertControllerStyle.alert)
+            instance.addAction(UIAlertAction(title: "You are shaking", style: UIAlertActionStyle.default, handler: nil))
+            self.present(instance, animated: true, completion: nil)
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
